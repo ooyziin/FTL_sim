@@ -1,4 +1,4 @@
-#include "ssd_state.h"
+#include "ssd_config.h"
 #include <algorithm>
 #include <cstring>
 
