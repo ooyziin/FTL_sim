@@ -1,6 +1,9 @@
 #pragma once
 #include <cstddef>
 #include <cstdint>
+#include <array>
+#include <queue>
+#include <map>
 
 // ---- Size helpers (C++ 표준 방식) ----
 constexpr std::uint64_t KB(std::uint64_t x) { return x * 1024ULL; }
@@ -45,6 +48,20 @@ struct PageMeta {
     int lpn;           // Logical Page Number in this physical page (or INVALID)
     PageState state;   // page state
 };
+
+extern GCPolicy POLICY;
+
+extern std::array<int, LPN_MAX> LPN_TO_PPN;
+extern std::queue<int> FREE_BLOCK_Q;
+extern std::queue<int> CLOSED_BLOCK_Q;
+
+extern std::array<PageMeta, PPN_MAX> PAGE_OOB;
+extern std::array<int, PPN_MAX> DATA;
+
+extern int offset;
+extern int current_block;
+
+void init_state();
 
 // 편의 함수
 inline int FIRST_PPN_OF_BLOCK(int bid) { return bid * PAGES_PER_BLOCK; }
