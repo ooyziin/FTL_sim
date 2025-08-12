@@ -1,15 +1,13 @@
+#include <iostream>
 #include "ssd_config.h"
+#include "trace.h"
 
 int main() {
-    // Sample input: Free block initialization (for simulation)
-    for (int i = 0; i < MAX_PBN; ++i) {
-        FREE_BLOCK_Q.push(i);
-    }
+    init_state();
 
-	  int offset = 0;
-    std::string trace_file = "test-fio-small";  // Path to the trace file
+    const std::string trace_file = "test-fio-small";
     processTraceFile(trace_file);
-  
-    std::cout << "DONE";
+
+    std::cout << "DONE\n";
     return 0;
 }
