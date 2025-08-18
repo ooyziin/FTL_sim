@@ -43,7 +43,7 @@ PAGE_OOB[ppn].mig_count=i;
     PAGE_OOB[ppn].lpn = lpn;
     PAGE_OOB[ppn].state = PageState::valid;
     DATA[ppn] = 1;
-
+    MIDA_offset[i]++;
     waf++;
     waf2++;
 
