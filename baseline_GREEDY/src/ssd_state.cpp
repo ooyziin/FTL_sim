@@ -16,7 +16,7 @@ std::array<PageMeta, PPN_MAX> PAGE_OOB{};
 std::array<int, PPN_MAX> DATA{};
 
 std::queue<int> FREE_BLOCK_Q;
-std::array<int, PPN_MAX> invalid_counter;
+std::array<int, MAX_PBN> invalid_counter;
 
 void OOB_init() {
     // Initialize OOB/Data
@@ -33,7 +33,7 @@ void OOB_init() {
     for (int lpn = 0; lpn < LPN_MAX; ++lpn) {
         LPN_TO_PPN[lpn] = INVALID;
     }
-    for (int i = 0; i < PPN_MAX; ++i) {
+    for (int i = 0; i < MAX_PBN; ++i) {
        invalid_counter[i] = INVALID;
     }
 }
