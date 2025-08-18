@@ -4,10 +4,8 @@
 #include "ssd_types.h"
 
 // === global states (defined in ssd_state.cpp) ===
-extern int offset;
 extern std::array<int, MIDA_n> MIDA_offset;
 extern std::array<int, MIDA_n> MIDA_current_block;
-extern int current_block;
 extern int ERASE_NUM;
 extern int VIC_NUM;
 extern int MIG_NUM;
@@ -25,4 +23,3 @@ extern std::array<int, PPN_MAX> invalid_counter;
 
 // init
 void OOB_init();
-
