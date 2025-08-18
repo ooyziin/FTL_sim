@@ -2,7 +2,10 @@
 simple SSD simulator to compare the performance of each FTL with test-fio-small trace file
 
 
-if you want to run this simulation
+# RUNNING
 
 make
 ./ssd_simulator
+Running
+
+<img src="https://capsule-render.vercel.app/api?type=모양&color=색상코드&height=높이&section=header&text=텍스트&fontSize=텍스트크기" />
