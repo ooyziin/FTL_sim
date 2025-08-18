@@ -43,6 +43,7 @@ MIG_NUM++;}
 
 void erase(int bid) {
     int base = FIRST_PPN_OF_BLOCK(bid);
+    invalid_counter[bid]=INVALID;
     for (int i = 0; i < PAGES_PER_BLOCK; ++i) {
         int ppn = base + i;
         PAGE_OOB[ppn].lpn = INVALID;
@@ -64,4 +65,3 @@ void garbageCollection() {
     erase(victim);
     FREE_BLOCK_Q.push(victim);
 }
-
