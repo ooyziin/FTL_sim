@@ -4,7 +4,7 @@
 #include "ftl.h"
 
 void write_lpn(int lpn) {
-    if (offset == 0) {
+    if ( MIDA_offset[0] == 0) {
         if (FREE_BLOCK_Q.empty()) {
             std::cout << "No free blocks available!\n";
             return;
@@ -37,6 +37,9 @@ void write_lpn(int lpn) {
 void write_lpn_gc(int lpn) {
 int page_num= LPN_TO_PPN[lpn];
 int i = (PAGE_OOB[page_num].mig_count < MIDA_n - 1) ? PAGE_OOB[page_num].mig_count + 1 : MIDA_n - 1;
+    if (MIDA_current_block[i]==INVALID) {
+	MIDA_current_block[i] = FREE_BLOCK_Q.front();
+	FREE_BLOCK_Q.pop();   }
 int ppn = MIDA_current_block[i] * PAGES_PER_BLOCK + MIDA_offset[i];
 PAGE_OOB[ppn].mig_count=i;
     LPN_TO_PPN[lpn] = ppn;
@@ -53,3 +56,5 @@ PAGE_OOB[ppn].mig_count=i;
         MIDA_offset[i] = 0;
     }
 }
+
+
