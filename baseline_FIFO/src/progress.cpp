@@ -10,7 +10,7 @@ void print_progress(long long chunk_idx_now) {
 
     std::cout << "[Progress: " << gb_now << "GiB]\n";
     std::cout << "TMP_WAF: " << waf / 1953125.0 << "\n";
-    std::cout << "WAF: "     << waf / (1953125.0 * chunk_idx_now) << "\n";
+    std::cout << "WAF: "     << waf2 / (1953125.0 * chunk_idx_now) << "\n";
     std::cout << "USED_BLOCKS: " << (MAX_PBN - static_cast<int>(FREE_BLOCK_Q.size())) << "\n";
     std::cout << "GC_policy_efficiency: " << gc << "\n";
     std::cout << "ERASE: " << ERASE_NUM << "\n";
