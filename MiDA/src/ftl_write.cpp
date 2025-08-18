@@ -9,7 +9,7 @@ void write_lpn(int lpn) {
             std::cout << "No free blocks available!\n";
             return;
         }
-        current_block = FREE_BLOCK_Q.front();
+        MIDA_current_block[0] = FREE_BLOCK_Q.front();
     }
     if (LPN_TO_PPN[lpn] != INVALID) {
     int page_num= LPN_TO_PPN[lpn];
@@ -17,8 +17,8 @@ void write_lpn(int lpn) {
         ++invalid_counter[block_num];
     }
 
-    int ppn = current_block * PAGES_PER_BLOCK + offset;
-    offset++;
+    int ppn = MIDA_current_block[0] * PAGES_PER_BLOCK + MIDA_offset[0];
+    MIDA_offset[0]++;
 
     LPN_TO_PPN[lpn] = ppn;
     PAGE_OOB[ppn].lpn = lpn;
@@ -28,9 +28,9 @@ void write_lpn(int lpn) {
     waf++;
     waf2++;
 
-    if (offset == PAGES_PER_BLOCK) {
+    if (MIDA_offset[0] == PAGES_PER_BLOCK) {
         FREE_BLOCK_Q.pop();
-        offset = 0;
+        MIDA_offset[0] = 0;
     }
 }
 
