@@ -1,8 +1,6 @@
 #include "ssd_state.h"
 #include "ssd_config.h"
 
-int offset = 0;
-int current_block = INVALID;
 int ERASE_NUM = 0;
 int VIC_NUM = 0;
 int MIG_NUM = 0;
@@ -14,7 +12,7 @@ GCPolicy POLICY = GREEDY;
 std::array<int, LPN_MAX> LPN_TO_PPN{};
 std::array<PageMeta, PPN_MAX> PAGE_OOB{};
 std::array<int, PPN_MAX> DATA{};
-std::array<int, MIDA_n> MIDA_offset{};     
+std::array<int, MIDA_n> MIDA_offset{};    
 std::array<int, MIDA_n> MIDA_current_block{};
 std::queue<int> FREE_BLOCK_Q;
 std::array<int, PPN_MAX> invalid_counter;
@@ -37,5 +35,9 @@ void OOB_init() {
     }
     for (int i = 0; i < PPN_MAX; ++i) {
        invalid_counter[i] = INVALID;
+    }
+    for (int i = 0; i < MIDA_n; ++i) {
+       MIDA_offset[i] = 0;
+       MIDA_current_block[i]=INVALID;
     }
 }
