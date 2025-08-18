@@ -35,6 +35,7 @@ void write_lpn(int lpn) {
 }
 
 void write_lpn_gc(int lpn) {
+int page_num= LPN_TO_PPN[lpn];
 int i = (PAGE_OOB[page_num].mig_count < MIDA_n - 1) ? PAGE_OOB[page_num].mig_count + 1 : MIDA_n - 1;
 int ppn = MIDA_current_block[i] * PAGES_PER_BLOCK + MIDA_offset[i];
 PAGE_OOB[ppn].mig_count=i;
@@ -47,8 +48,8 @@ PAGE_OOB[ppn].mig_count=i;
     waf2++;
 
     if (MIDA_offset[i] == PAGES_PER_BLOCK) {
-        MIDA_current_block[i]=FREE_BLOCK_Q.pop();
+        MIDA_current_block[i] = FREE_BLOCK_Q.front();  
+	FREE_BLOCK_Q.pop();   
         MIDA_offset[i] = 0;
     }
 }
-
