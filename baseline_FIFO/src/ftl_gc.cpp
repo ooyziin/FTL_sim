@@ -13,7 +13,7 @@ int pickVictimBlock() {
         CLOSED_BLOCK_Q.pop();
         VIC_NUM++;
         return bid;
-}
+}}
 
 void migrateValidPage(int src_ppn) {
 int lpn = PAGE_OOB[src_ppn].lpn;
