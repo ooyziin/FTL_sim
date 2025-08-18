@@ -13,10 +13,6 @@ int pickVictimBlock() {
         CLOSED_BLOCK_Q.pop();
         VIC_NUM++;
         return bid;
-    } else {
-        // TODO: GREEDY policy implementation
-        return 0;
-    }
 }
 
 void migrateValidPage(int src_ppn) {
