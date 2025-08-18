@@ -14,7 +14,8 @@ GCPolicy POLICY = GREEDY;
 std::array<int, LPN_MAX> LPN_TO_PPN{};
 std::array<PageMeta, PPN_MAX> PAGE_OOB{};
 std::array<int, PPN_MAX> DATA{};
-
+std::array<int, MIDA_n> MIDA_offset{};     
+std::array<int, MIDA_n> MIDA_current_block{};
 std::queue<int> FREE_BLOCK_Q;
 std::array<int, PPN_MAX> invalid_counter;
 
@@ -38,4 +39,3 @@ void OOB_init() {
        invalid_counter[i] = INVALID;
     }
 }
-
