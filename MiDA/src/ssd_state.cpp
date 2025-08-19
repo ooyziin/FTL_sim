@@ -37,7 +37,7 @@ void OOB_init() {
 
     // Initialize invalid counters
     for (int i = 0; i < MAX_PBN ; ++i) {
-        invalid_counter[i] = -1;  // <- 여기 수정됨
+        invalid_counter[i] = -1;  
     }
 
     // Initialize MIDA pointers
