@@ -7,7 +7,7 @@ constexpr int SSDsize_GB = 8;
 constexpr int PAGE_SIZE_KB = 4;
 constexpr int PAGES_PER_BLOCK = 1024;
 constexpr int INVALID = -1;
-constexpr int MIDA_n = pow(2, 2); // (2,n) n is tunable
+constexpr int MIDA_n = 4; // (2,n) n is tunable
 
 constexpr int MAX_LBN = static_cast<int>(
     (1LL * SSDsize_GB * 1000LL * 1000LL * 1000LL * 8) /

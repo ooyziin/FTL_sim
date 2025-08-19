@@ -19,7 +19,7 @@ extern std::array<PageMeta, PPN_MAX> PAGE_OOB;
 extern std::array<int, PPN_MAX> DATA;
 
 extern std::queue<int> FREE_BLOCK_Q;
-extern std::array<int, PPN_MAX> invalid_counter;
+extern std::array<int, MAX_PBN> invalid_counter;
 
 // init
 void OOB_init();
