@@ -12,10 +12,10 @@ GCPolicy POLICY = GREEDY;
 std::array<int, LPN_MAX> LPN_TO_PPN{};
 std::array<PageMeta, PPN_MAX> PAGE_OOB{};
 std::array<int, PPN_MAX> DATA{};
-std::array<int, MIDA_n> MIDA_offset{};    
+std::array<int, MIDA_n> MIDA_offset{};
 std::array<int, MIDA_n> MIDA_current_block{};
 std::queue<int> FREE_BLOCK_Q;
-std::array<int,  MAX_PBN > invalid_counter;
+std::array<int, MAX_PBN > invalid_counter;
 
 void OOB_init() {
     // Initialize OOB/Data
@@ -29,15 +29,21 @@ void OOB_init() {
             DATA[ppn] = 0;
         }
     }
-    // Initialize map
+
+    // Initialize mapping table
     for (int lpn = 0; lpn < LPN_MAX; ++lpn) {
         LPN_TO_PPN[lpn] = INVALID;
     }
-    for (int i = 0; i <  MAX_PBN ; ++i) {
-       invalid_counter[i] = INVALID;
+
+    // Initialize invalid counters
+    for (int i = 0; i < MAX_PBN ; ++i) {
+        invalid_counter[i] = 0;  // <- 여기 수정됨
     }
-    for (int i = 0; i < MIDA_n; ++i) {
-       MIDA_offset[i] = 0;
-       MIDA_current_block[i]=INVALID;
-    }
+
+    // Initialize MIDA pointers
+for (int i = 0; i < MIDA_n; ++i) {
+    MIDA_current_block[i] = FREE_BLOCK_Q.front();
+    FREE_BLOCK_Q.pop();
+    MIDA_offset[i] = 0;
+}
 }
