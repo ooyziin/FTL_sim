@@ -37,13 +37,15 @@ void OOB_init() {
 
     // Initialize invalid counters
     for (int i = 0; i < MAX_PBN ; ++i) {
-        invalid_counter[i] = 0;  // <- 여기 수정됨
+        invalid_counter[i] = -1;  // <- 여기 수정됨
     }
 
     // Initialize MIDA pointers
 for (int i = 0; i < MIDA_n; ++i) {
     MIDA_current_block[i] = FREE_BLOCK_Q.front();
+    invalid_counter[MIDA_current_block[i]] = 0;
     FREE_BLOCK_Q.pop();
     MIDA_offset[i] = 0;
+    
 }
 }
