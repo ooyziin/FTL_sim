@@ -3,7 +3,6 @@
 #include <queue>
 #include "ssd_types.h"
 
-// === global states (defined in ssd_state.cpp) ===
 extern int offset;
 extern int current_block;
 extern int ERASE_NUM;
