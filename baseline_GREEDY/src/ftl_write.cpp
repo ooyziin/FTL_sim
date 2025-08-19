@@ -30,6 +30,7 @@ void write_lpn(int lpn) {
 
     if (offset == PAGES_PER_BLOCK) {
         FREE_BLOCK_Q.pop();
+        invalid_counter[FREE_BLOCK_Q.front()]=0;
         offset = 0;
     }
 }

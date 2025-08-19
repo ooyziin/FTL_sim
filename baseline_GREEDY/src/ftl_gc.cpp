@@ -12,11 +12,11 @@ int pickVictimBlock() {
 
     for (int i = 1; i < MAX_PBN; ++i) {
         int v = invalid_counter[i];
-        if (v > best_val) {
-            best_val = v;
-            best_idx = i;
+            if (v != -1 &&v > best_val) {
+                best_val = v;
+                best_idx = i;
+            }
         }
-    }
 
     if (best_val == -1) {
         std::cerr << "some error exists\n";
