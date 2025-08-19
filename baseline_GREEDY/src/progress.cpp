@@ -3,7 +3,7 @@
 #include "ssd_config.h"
 
 void print_progress(long long chunk_idx_now) {
-    const long long gb_now = chunk_idx_now * 8; // 8GiB per chunk
+    const long long gb_now = chunk_idx_now * 8; 
     double mig_num = MIG_NUM;
     double vic_num = static_cast<double>(VIC_NUM) * PAGES_PER_BLOCK;
     double gc = (vic_num > 0.0) ? (mig_num / vic_num) : 0.0;
