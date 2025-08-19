@@ -18,7 +18,7 @@ std::queue<int> FREE_BLOCK_Q;
 std::array<int, MAX_PBN > invalid_counter;
 
 void OOB_init() {
-    // Initialize OOB/Data
+    // Initialize 
     for (int j = 0; j < MAX_PBN; ++j) {
         int base = FIRST_PPN_OF_BLOCK(j);
         for (int i = 0; i < PAGES_PER_BLOCK; ++i) {
