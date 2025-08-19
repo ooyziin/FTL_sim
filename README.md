@@ -2,14 +2,14 @@
 simple SSD simulator to compare the performance of each FTL with test-fio-small trace file
 
 제작중
-## Trace File DOWNLOAD
+## Trace File download
 ```sh
 wget https://zenodo.org/record/10409599/files/test-fio-small
 ```
 
 
 
-## RUNNING
+## running
 ```sh
 make
 ./ssd_simulator
