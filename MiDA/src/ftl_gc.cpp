@@ -10,7 +10,7 @@ int pickVictimBlock() {
     int best_idx = 0;
     int best_val = invalid_counter[0];
 
-    for (int i = 1; i < PPN_MAX; ++i) {
+    for (int i = 1; i <  MAX_PBN ; ++i) {
         int v = invalid_counter[i];
         if (v > best_val) {
             best_val = v;

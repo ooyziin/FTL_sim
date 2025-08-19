@@ -19,7 +19,7 @@ void write_lpn(int lpn) {
 
     int ppn = MIDA_current_block[0] * PAGES_PER_BLOCK + MIDA_offset[0];
     MIDA_offset[0]++;
-
+	PAGE_OOB[ppn].mig_count = 0; 
     LPN_TO_PPN[lpn] = ppn;
     PAGE_OOB[ppn].lpn = lpn;
     PAGE_OOB[ppn].state = PageState::valid;
