@@ -3,7 +3,6 @@
 #include <queue>
 #include "ssd_types.h"
 
-// === global states (defined in ssd_state.cpp) ===
 extern std::array<int, MIDA_n> MIDA_offset;
 extern std::array<int, MIDA_n> MIDA_current_block;
 extern int ERASE_NUM;
