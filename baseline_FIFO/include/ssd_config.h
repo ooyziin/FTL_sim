@@ -1,7 +1,6 @@
 #pragma once
 #include <cstddef>
 
-// === constants ===
 constexpr int SSDsize_GB = 8;
 constexpr int PAGE_SIZE_KB = 4;
 constexpr int PAGES_PER_BLOCK = 1024;
