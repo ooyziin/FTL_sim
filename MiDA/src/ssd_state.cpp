@@ -24,7 +24,7 @@ void OOB_init() {
         for (int i = 0; i < PAGES_PER_BLOCK; ++i) {
             int ppn = base + i;
             PAGE_OOB[ppn].lpn = INVALID;
-            PAGE_OOB[ppn].write_num = INVALID;
+            PAGE_OOB[ppn].mig_count = 0;
             PAGE_OOB[ppn].state = PageState::invalid;
             DATA[ppn] = 0;
         }
