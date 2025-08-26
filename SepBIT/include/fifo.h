@@ -9,13 +9,17 @@ public:
     fifo() {
         mTail = 0;
         mHead = 0;
+        mArray = new int[kFileSize];
     }
     
        void Update(int blockAddr) {
+
 	mArray[mTail] = blockAddr;
 	mMap[blockAddr] = mTail;
 	mTail += 1;
+
      	if (mTail == kFileSize) mTail = 0;
+
     	if ((mTail + kFileSize - mHead) % kFileSize > l)
     	 {
         int oldBlockAddr = mArray[mHead];
@@ -29,7 +33,6 @@ public:
         if ((mTail + kFileSize - mHead) % kFileSize > l)
         {
           oldBlockAddr = mArray[mHead];
-
           if (mMap[oldBlockAddr] == mHead)
           {
             mMap.erase(oldBlockAddr);
