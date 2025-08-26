@@ -52,7 +52,16 @@ void erase(int bid) {
 void garbageCollection() {
     int victim = pickVictimBlock();
     int base = FIRST_PPN_OF_BLOCK(victim);
-
+	int c=BLOCK_OOB[victim].blockclass;
+	int blockclass=-1;
+	int blocklifespan = timestamp - PAGE_OOB[base].write_num;
+	if(c==0){
+	n_tot=n_tot+blocklifespan;
+	n_c++;
+	if(n_c==16)
+	{l=n_tot/16;
+	n_c=0;
+	n_tot=0;}}
     for (int i = 0; i < PAGES_PER_BLOCK; ++i) {
         int ppn = base + i;
         migrateValidPage(ppn);
