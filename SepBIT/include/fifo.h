@@ -10,12 +10,12 @@ public:
         mHead = 0;
     }
     
-       void Update(int blockAddr) {// void Update(int blockAddr, int threshold
+       void Update(int blockAddr,int l) {
 	mArray[mTail] = blockAddr;
 	mMap[blockAddr] = mTail;
 	mTail += 1;
      	if (mTail == kFileSize) mTail = 0;
-    	if ((mTail + kFileSize - mHead) % kFileSize > 1000000)
+    	if ((mTail + kFileSize - mHead) % kFileSize > l)
     	 {
         int oldBlockAddr = mArray[mHead];
         if (mMap[oldBlockAddr] == mHead)
@@ -25,7 +25,7 @@ public:
         mHead += 1;
         if (mHead == kFileSize) mHead = 0;
 
-        if ((mTail + kFileSize - mHead) % kFileSize > 1000000)
+        if ((mTail + kFileSize - mHead) % kFileSize > l)
         {
           oldBlockAddr = mArray[mHead];
 

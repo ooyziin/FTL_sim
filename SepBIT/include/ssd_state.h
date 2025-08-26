@@ -14,6 +14,7 @@ extern int MIG_NUM;
 extern double waf;
 extern double waf2;
 extern int timestamp;
+extern int l;
 
 extern GCPolicy POLICY;
 extern fifo* fifo_q;
