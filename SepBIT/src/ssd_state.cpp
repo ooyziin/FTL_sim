@@ -8,6 +8,8 @@ double waf = 0;
 double waf2 = 0;
 int timestamp = 0;
 int l=128*1000*1000;
+int n_c=0;
+int n_tot=0;
 
 GCPolicy POLICY = GREEDY;
 
