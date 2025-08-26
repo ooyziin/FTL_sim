@@ -41,7 +41,7 @@ void write_lpn(int lpn) {
 
 void write_lpn_gc(int lpn) {
     int page_num = LPN_TO_PPN[lpn];
-    int block_num = page_num / PAGES_PER_BLOCK;
+	int block_num = page_num / PAGES_PER_BLOCK;
     int c=BLOCK_OOB[block_num].blockclass;
     int blockclass=-1;
     if(c==0)
