@@ -12,7 +12,6 @@ enum class PageState {
 struct PageMeta {
     int lpn;
     PageState state;
-    int mig_count;
     int write_num;
 };
 
