@@ -12,12 +12,11 @@ GCPolicy POLICY = GREEDY;
 
 std::array<int, LPN_MAX> LPN_TO_PPN{};
 std::array<PageMeta, PPN_MAX> PAGE_OOB{};
-FIFO* fifo_q = nullptr;
 std::array<int, PPN_MAX> DATA{};
 std::array<int, class_num> class_offset{};
 std::array<int, class_num> class_current_block{};
 std::queue<int> FREE_BLOCK_Q;
-std::array<int, MAX_PBN > BLOCK_OOB;
+std::array<blockMeta, MAX_PBN > BLOCK_OOB;
 
 void OOB_init() {
     // Initialize 

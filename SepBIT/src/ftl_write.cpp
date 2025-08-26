@@ -1,4 +1,5 @@
 #include <iostream>
+#include "fifo.h"
 #include "ssd_state.h"
 #include "ssd_config.h"
 #include "ftl.h"
@@ -39,25 +40,37 @@ void write_lpn(int lpn) {
 
 void write_lpn_gc(int lpn) {
     int page_num = LPN_TO_PPN[lpn];
-
-    int i = (PAGE_OOB[page_num].mig_count < MIDA_n - 1) ? PAGE_OOB[page_num].mig_count + 1 : MIDA_n - 1;
- 
-
-    int ppn = MIDA_current_block[i] * PAGES_PER_BLOCK + MIDA_offset[i];
+    int block_num = page_num / PAGES_PER_BLOCK;
+    int c=BLOCK_OOB[block_num].blockclass;
+    int blockclass=-1;
+    if(c==0)
+    {blockclass=2;}
+    else {
+        int age = timestamp - PAGE_OOB[page_num].write_num;
+        
+        if (age >= 0 && age < 4000000) {
+            blockclass = 3;
+        } else if (age >= 4000000 && age < 16000000) {
+            blockclass = 4;
+        } else if (age >= 16000000) {
+           blockclass = 5;
+        }
+    }
+	
+    int ppn = class_current_block[blockclass] * PAGES_PER_BLOCK + class_offset[blockclass];
     PAGE_OOB[ppn] = PAGE_OOB[page_num]; 
-    PAGE_OOB[ppn].mig_count = i;
-
     LPN_TO_PPN[lpn] = ppn;
     DATA[ppn] = 1;
 
-    MIDA_offset[i]++;
+    class_offset[blockclass]++;
     waf++;
     waf2++;
 
-    if (MIDA_offset[i] == PAGES_PER_BLOCK) {
-        MIDA_current_block[i] = FREE_BLOCK_Q.front();
-        invalid_counter[MIDA_current_block[i]]=0;
+    if (class_offset[blockclass] == PAGES_PER_BLOCK) {
+        class_current_block[blockclass] = FREE_BLOCK_Q.front();
+        BLOCK_OOB[class_current_block[blockclass]].invalid_counter=0;
+        BLOCK_OOB[class_current_block[blockclass]].blockclass=blockclass;
         FREE_BLOCK_Q.pop();
-        MIDA_offset[i] = 0;
+        class_offset[blockclass] = 0;
     }
 }

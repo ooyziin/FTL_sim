@@ -7,10 +7,10 @@
 int pickVictimBlock() {
     if (POLICY == GREEDY) {
         int best_idx = 0;
-        int max_invalid = invalid_counter[0];
+        int max_invalid = BLOCK_OOB[0].invalid_counter;
 
         for (int i = 1; i < MAX_PBN ; ++i) {
-            int v = invalid_counter[i];
+            int v = BLOCK_OOB[i].invalid_counter;
             if (v != -1 &&v > max_invalid) {
                 max_invalid = v;
                 best_idx = i;
@@ -28,7 +28,6 @@ int pickVictimBlock() {
 void migrateValidPage(int src_ppn) {
     int lpn = PAGE_OOB[src_ppn].lpn;
     if (lpn == INVALID) return;  // logically invalid
-
     if (LPN_TO_PPN[lpn] != src_ppn) return;  // already moved
 
     write_lpn_gc(lpn);  // MIDA GC 이동
@@ -37,13 +36,13 @@ void migrateValidPage(int src_ppn) {
 
 void erase(int bid) {
     int base = FIRST_PPN_OF_BLOCK(bid);
-    invalid_counter[bid] = -1;  // <- reset counter
-
+    BLOCK_OOB[bid].invalid_counter = -1;  // <- reset counter
+	BLOCK_OOB[bid].blockclass = -1;
     for (int i = 0; i < PAGES_PER_BLOCK; ++i) {
         int ppn = base + i;
         PAGE_OOB[ppn].lpn = INVALID;
         PAGE_OOB[ppn].state = PageState::erased;
-        PAGE_OOB[ppn].mig_count = 0;
+
         DATA[ppn] = 0;
     }
 
