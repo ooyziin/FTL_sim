@@ -6,14 +6,14 @@
 
 
 void write_lpn(int lpn) {
+    int blockclass; 
     if (LPN_TO_PPN[lpn] != INVALID) {
         int page_num = LPN_TO_PPN[lpn];
         int block_num = page_num / PAGES_PER_BLOCK;
         BLOCK_OOB[block_num].invalid_counter++;}
         
-	int lifespan= fifo_q-> Query(lpn);
-	fifo_q-> Update(lpn)
-	int blockclass = (lifespan >= l || lifespan == INVALID) ? 1 : 0; 
+	fifo_q-> Update(lpn);
+ 	blockclass = (fifo_q->Query(lpn) >= l || fifo_q->Query(lpn) == INVALID) ? 1 : 0; 
 	int ppn = class_current_block[blockclass] * PAGES_PER_BLOCK + class_offset[blockclass];
     class_offset[blockclass]++;
 

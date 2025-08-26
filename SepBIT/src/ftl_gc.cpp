@@ -53,7 +53,6 @@ void garbageCollection() {
     int victim = pickVictimBlock();
     int base = FIRST_PPN_OF_BLOCK(victim);
 	int c=BLOCK_OOB[victim].blockclass;
-	int blockclass=-1;
 	int blocklifespan = timestamp - PAGE_OOB[base].write_num;
 	if(c==0){
 	n_tot=n_tot+blocklifespan;
