@@ -12,7 +12,8 @@ void write_lpn(int lpn) {
         BLOCK_OOB[block_num].invalid_counter++;}
         
 	int lifespan= fifo_q-> Query(lpn);
-	int blockclass = (lifespan >= 1000000 || lifespan == INVALID) ? 1 : 0; //threshold !!!!!!!!!!!!!!!!!!!!!!!!!
+	fifo_q-> Update(lpn)
+	int blockclass = (lifespan >= l || lifespan == INVALID) ? 1 : 0; 
 	int ppn = class_current_block[blockclass] * PAGES_PER_BLOCK + class_offset[blockclass];
     class_offset[blockclass]++;
 
@@ -48,11 +49,11 @@ void write_lpn_gc(int lpn) {
     else {
         int age = timestamp - PAGE_OOB[page_num].write_num;
         
-        if (age >= 0 && age < 4000000) {
+        if (age >= 0 && age < 4*l) {
             blockclass = 3;
-        } else if (age >= 4000000 && age < 16000000) {
+        } else if (age >= 4*l && age < 16*l) {
             blockclass = 4;
-        } else if (age >= 16000000) {
+        } else if (age >= 16*l) {
            blockclass = 5;
         }
     }
