@@ -1,7 +1,10 @@
 #pragma once
 #include <array>
 #include <queue>
+#include <map>
 #include "ssd_types.h"
+
+class FIFO;
 
 extern std::array<int, class_num> class_offset;
 extern std::array<int, class_num> class_current_block;
@@ -33,7 +36,7 @@ public:
         mHead = 0;
     }
     
-       void Update(int blockAddr, int threshold) {
+       void Update(int blockAddr) {// void Update(int blockAddr, int threshold
 	mArray[mTail] = blockAddr;
 	mMap[blockAddr] = mTail;
 	mTail += 1;
