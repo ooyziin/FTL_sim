@@ -6,14 +6,15 @@
 
 
 void write_lpn(int lpn) {
+
     int blockclass; 
     if (LPN_TO_PPN[lpn] != INVALID) {
         int page_num = LPN_TO_PPN[lpn];
         int block_num = page_num / PAGES_PER_BLOCK;
         BLOCK_OOB[block_num].invalid_counter++;}
-        
 	fifo_q-> Update(lpn);
  	blockclass = (fifo_q->Query(lpn) >= l || fifo_q->Query(lpn) == INVALID) ? 1 : 0; 
+
 	int ppn = class_current_block[blockclass] * PAGES_PER_BLOCK + class_offset[blockclass];
     class_offset[blockclass]++;
 
@@ -25,7 +26,9 @@ void write_lpn(int lpn) {
     waf++;
     waf2++;
     timestamp++;
-
+    //std::cout << "[WRITE] LPN " << lpn << " -> PPN " << ppn 
+            //  << " (class " << blockclass << ")"<<std::endl;
+              
     if (class_offset[blockclass] == PAGES_PER_BLOCK) {
             if (FREE_BLOCK_Q.empty()) {
             std::cout << "No free blocks available!\n";
@@ -67,6 +70,10 @@ void write_lpn_gc(int lpn) {
     waf++;
     waf2++;
 
+ //   std::cout << "[GC-WRITE] LPN " << lpn << " -> PPN " << ppn 
+            //  << " (class " << blockclass << ")"<<std::endl;
+              
+              
     if (class_offset[blockclass] == PAGES_PER_BLOCK) {
         class_current_block[blockclass] = FREE_BLOCK_Q.front();
         BLOCK_OOB[class_current_block[blockclass]].invalid_counter=0;

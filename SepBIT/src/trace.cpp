@@ -30,6 +30,7 @@ void processTraceFile(const std::string &filename) {
             while (static_cast<int>(FREE_BLOCK_Q.size()) <= GC_TRIGGER_FREE_BLOCKS) {
         garbageCollection();
     }
+
             write_lpn(lba);
             ++write_lines;
             output_progress_if_needed(write_lines, CHUNK_LINES);
