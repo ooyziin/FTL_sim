@@ -11,12 +11,12 @@ extern std::array<int, class_num> class_current_block;
 extern int ERASE_NUM;
 extern int VIC_NUM;
 extern int MIG_NUM;
-extern int n_c;
-extern int n_tot;
 extern double waf;
 extern double waf2;
 extern int timestamp;
 extern int l;
+extern int n_c;
+extern int n_tot;
 
 extern GCPolicy POLICY;
 extern fifo* fifo_q;

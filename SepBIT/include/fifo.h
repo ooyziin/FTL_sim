@@ -1,6 +1,7 @@
 #pragma once
 #include <map>  
 #include "ssd_types.h"
+#include "ssd_state.h"
 
 class fifo {
 public:
@@ -10,7 +11,7 @@ public:
         mHead = 0;
     }
     
-       void Update(int blockAddr,int l) {
+       void Update(int blockAddr) {
 	mArray[mTail] = blockAddr;
 	mMap[blockAddr] = mTail;
 	mTail += 1;
