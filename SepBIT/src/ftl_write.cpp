@@ -12,8 +12,18 @@ void write_lpn(int lpn) {
         int page_num = LPN_TO_PPN[lpn];
         int block_num = page_num / PAGES_PER_BLOCK;
         BLOCK_OOB[block_num].invalid_counter++;}
-	fifo_q-> Update(lpn);
- 	blockclass = (fifo_q->Query(lpn) >= l || fifo_q->Query(lpn) == INVALID) ? 1 : 0; 
+
+int lifespan = fifo_q->Query(lpn);
+if (l == 128*1024*1024) {
+    // 아직 threshold 미정 → 무조건 class 0
+    blockclass = 0;
+} else {
+    // threshold 계산된 뒤 → 원래 로직
+    blockclass = (lifespan >= l || lifespan == INVALID) ? 1 : 0;
+}
+fifo_q->Update(lpn);
+
+
 
 	int ppn = class_current_block[blockclass] * PAGES_PER_BLOCK + class_offset[blockclass];
     class_offset[blockclass]++;
@@ -26,8 +36,9 @@ void write_lpn(int lpn) {
     waf++;
     waf2++;
     timestamp++;
-    //std::cout << "[WRITE] LPN " << lpn << " -> PPN " << ppn 
-            //  << " (class " << blockclass << ")"<<std::endl;
+//if(blockclass==1){
+  //std::cout << "[WRITE] LPN " << lpn << " -> PPN " << ppn 
+    //      << " (class " << blockclass << ")"<<std::endl;}
               
     if (class_offset[blockclass] == PAGES_PER_BLOCK) {
             if (FREE_BLOCK_Q.empty()) {
